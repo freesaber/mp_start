@@ -29,10 +29,12 @@ public class SimpleTest {
     @Test
     public void insert(){
         User user = new User();
-        user.setName("向北");
-        user.setAge(26);
+        user.setName("向中");
+        user.setAge(25);
+        user.setEmail("xz@baomidou.com");
         user.setManagerId(1088248166370832385L);
         user.setCreateTime(LocalDateTime.now());
+        user.setRemark("this is remark");
         int rows = userMapper.insert(user);
         System.out.println("影响记录数：" + rows);
     }
