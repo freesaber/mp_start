@@ -1,5 +1,8 @@
 package com.mp;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.mp.dao.UserMapper;
 import com.mp.entity.User;
 import org.junit.Assert;
@@ -40,5 +43,18 @@ public class SimpleTest {
         columnMap.put("age", 25);
         List<User> users = userMapper.selectByMap(columnMap);
         users.forEach(System.out::println);
+    }
+
+    /*
+        名字中包含雨并且年龄小于40
+     */
+    @Test
+    public void selectByWrapper(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        //QueryWrapper<User> queryWrapper = Wrappers.<User>query();
+        queryWrapper.like("name", "雨");
+        
+
+
     }
 }
