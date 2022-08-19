@@ -29,8 +29,8 @@ public class SimpleTest {
     @Test
     public void insert(){
         User user = new User();
-        user.setName("刘明强");
-        user.setAge(31);
+        user.setName("向北");
+        user.setAge(26);
         user.setManagerId(1088248166370832385L);
         user.setCreateTime(LocalDateTime.now());
         int rows = userMapper.insert(user);
