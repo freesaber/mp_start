@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.jws.soap.SOAPBinding;
-import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,22 +21,24 @@ public class SimpleTest {
     private UserMapper userMapper;
 
     @Test
-    public void Select(){
-        List<User> users = userMapper.selectList(null);
-        Assert.assertEquals(5,users.size());
+    public void selectById(){
+        User user = userMapper.selectById(1094590409767661570L);
+        System.out.println(user);
+    }
+
+    @Test
+    public void selectByIds(){
+        List<Long> ids = Arrays.asList(1088248166370832385L, 1094592041087729666L, 1559063787270647810L);
+        List<User> users = userMapper.selectBatchIds(ids);
         users.forEach(System.out::println);
     }
 
     @Test
-    public void insert(){
-        User user = new User();
-        user.setName("向中");
-        user.setAge(25);
-        user.setEmail("xz@baomidou.com");
-        user.setManagerId(1088248166370832385L);
-        user.setCreateTime(LocalDateTime.now());
-        user.setRemark("this is remark");
-        int rows = userMapper.insert(user);
-        System.out.println("影响记录数：" + rows);
+    public void selectByMap(){
+        Map<String,Object> columnMap = new HashMap<>();
+        //columnMap.put("name", "王天风");
+        columnMap.put("age", 25);
+        List<User> users = userMapper.selectByMap(columnMap);
+        users.forEach(System.out::println);
     }
 }
