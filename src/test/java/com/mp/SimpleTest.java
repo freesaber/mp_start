@@ -90,12 +90,37 @@ public class SimpleTest {
 
     /*
        创建日期为2019年2月14日，并且直属上级为名字为王姓
+       date_format(create_time,'%Y-%m-%d')='2019-02-14' and manager_id in (select id from user where name like '王%')
     */
     @Test
     public void selectByWrapper4() {
         queryWrapper = new QueryWrapper<>();
         queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = {0}","2019-02-14")
                 .inSql("manager_id","select id from user where name like '王%'");
+        printQueryWrapper();
+    }
+
+    /*
+       名字为王性并且（年龄小于40或邮箱不为空）
+       name like '王%' and (age<40 or email is not null)
+    */
+    @Test
+    public void selectByWrapper5() {
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.likeRight("name","王")
+                .and(qw -> qw.lt("age", 40).or().isNotNull("email"));
+        printQueryWrapper();
+    }
+
+    /*
+       名字为王性或者（年龄小于40兵器年龄大于20并且邮箱不为空）
+       name like '王%' or (age<40 and age>20 and email is not null)
+    */
+    @Test
+    public void selectByWrapper6() {
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.likeRight("name","王")
+                .or(qw -> qw.gt("age", 20).lt("age", 40).isNotNull("email"));
         printQueryWrapper();
     }
 }
