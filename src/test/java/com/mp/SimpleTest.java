@@ -150,12 +150,36 @@ public class SimpleTest {
     }
 
     /*
-        只返回满足条件的其中一条语句即可
+       只返回满足条件的其中一条语句即可
     */
     @Test
     public void selectByWrapper9() {
         queryWrapper = new QueryWrapper<>();
         queryWrapper.in("age",Arrays.asList(30,31,34,35)).last("limit 1");
+        printQueryWrapper();
+    }
+
+    /*
+       查询指定字段
+     */
+    @Test
+    public void selectByWrapperSupper(){
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id","name")
+                .like("name", "雨")
+                .lt("age", 40);
+        printQueryWrapper();
+    }
+
+    /*
+       排除指定字段
+     */
+    @Test
+    public void selectByWrapperSupper2(){
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.select(User.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"))
+                .like("name", "雨")
+                .lt("age", 40);
         printQueryWrapper();
     }
 }
