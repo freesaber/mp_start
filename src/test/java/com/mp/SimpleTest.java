@@ -123,4 +123,39 @@ public class SimpleTest {
                 .or(qw -> qw.gt("age", 20).lt("age", 40).isNotNull("email"));
         printQueryWrapper();
     }
+
+    /*
+       (年龄小于40或邮箱不为空)并且名字为王姓名
+       (age<40 or email is not null) and name like '王$'
+    */
+    @Test
+    public void selectByWrapper7() {
+        queryWrapper = new QueryWrapper<>();
+        // 正常嵌套 不带 AND 或者 OR
+        // nested换成and也可以正常执行
+        queryWrapper.nested(qw -> qw.lt("age", 40).or().isNotNull("email"))
+                .likeRight("name","王");
+        printQueryWrapper();
+    }
+
+    /*
+       年龄为30、31、34、35
+       age in (30、31、34、35)
+    */
+    @Test
+    public void selectByWrapper8() {
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("age",Arrays.asList(30,31,34,35));
+        printQueryWrapper();
+    }
+
+    /*
+        只返回满足条件的其中一条语句即可
+    */
+    @Test
+    public void selectByWrapper9() {
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("age",Arrays.asList(30,31,34,35)).last("limit 1");
+        printQueryWrapper();
+    }
 }
