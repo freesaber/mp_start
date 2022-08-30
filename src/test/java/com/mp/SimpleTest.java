@@ -2,6 +2,7 @@ package com.mp;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.mp.dao.UserMapper;
 import com.mp.entity.User;
@@ -52,7 +53,7 @@ public class SimpleTest {
         users.forEach(System.out::println);
     }
 
-    /*
+    /**
         名字中包含雨并且年龄小于40
      */
     @Test
@@ -63,7 +64,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        名字中包含雨，并且年龄大于等于20，且小于等于40，并且email不为空
     */
     @Test
@@ -75,7 +76,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        名字为王姓或者年龄大于等于25，按照年龄降序排列。年龄相同按照id升序排列
     */
     @Test
@@ -88,7 +89,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        创建日期为2019年2月14日，并且直属上级为名字为王姓
        date_format(create_time,'%Y-%m-%d')='2019-02-14' and manager_id in (select id from user where name like '王%')
     */
@@ -100,7 +101,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        名字为王性并且（年龄小于40或邮箱不为空）
        name like '王%' and (age<40 or email is not null)
     */
@@ -112,7 +113,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        名字为王性或者（年龄小于40兵器年龄大于20并且邮箱不为空）
        name like '王%' or (age<40 and age>20 and email is not null)
     */
@@ -124,7 +125,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        (年龄小于40或邮箱不为空)并且名字为王姓名
        (age<40 or email is not null) and name like '王$'
     */
@@ -138,7 +139,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        年龄为30、31、34、35
        age in (30、31、34、35)
     */
@@ -149,7 +150,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        只返回满足条件的其中一条语句即可
     */
     @Test
@@ -159,7 +160,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        查询指定字段
      */
     @Test
@@ -171,7 +172,7 @@ public class SimpleTest {
         printQueryWrapper();
     }
 
-    /*
+    /**
        排除指定字段
      */
     @Test
@@ -180,6 +181,19 @@ public class SimpleTest {
         queryWrapper.select(User.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"))
                 .like("name", "雨")
                 .lt("age", 40);
+        printQueryWrapper();
+    }
+
+    /**
+     * 控制条件是否加入
+     */
+    @Test
+    public void testCondition(){
+        String name = "王";
+        String email = "";
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotEmpty(name), "name", name)
+                .like(StringUtils.isNotEmpty(email), "email", email);
         printQueryWrapper();
     }
 }
