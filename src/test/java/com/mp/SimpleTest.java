@@ -87,4 +87,15 @@ public class SimpleTest {
                 .orderByDesc("age").orderByAsc("id");
         printQueryWrapper();
     }
+
+    /*
+       创建日期为2019年2月14日，并且直属上级为名字为王姓
+    */
+    @Test
+    public void selectByWrapper4() {
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = {0}","2019-02-14")
+                .inSql("manager_id","select id from user where name like '王%'");
+        printQueryWrapper();
+    }
 }
