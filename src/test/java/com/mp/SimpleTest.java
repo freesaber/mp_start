@@ -54,7 +54,7 @@ public class SimpleTest {
     }
 
     /**
-        名字中包含雨并且年龄小于40
+     * 名字中包含雨并且年龄小于40
      */
     @Test
     public void selectByWrapper(){
@@ -65,7 +65,7 @@ public class SimpleTest {
     }
 
     /**
-       名字中包含雨，并且年龄大于等于20，且小于等于40，并且email不为空
+     * 名字中包含雨，并且年龄大于等于20，且小于等于40，并且email不为空
     */
     @Test
     public void selectByWrapper2(){
@@ -77,7 +77,7 @@ public class SimpleTest {
     }
 
     /**
-       名字为王姓或者年龄大于等于25，按照年龄降序排列。年龄相同按照id升序排列
+     * 名字为王姓或者年龄大于等于25，按照年龄降序排列。年龄相同按照id升序排列
     */
     @Test
     public void selectByWrapper3() {
@@ -90,8 +90,8 @@ public class SimpleTest {
     }
 
     /**
-       创建日期为2019年2月14日，并且直属上级为名字为王姓
-       date_format(create_time,'%Y-%m-%d')='2019-02-14' and manager_id in (select id from user where name like '王%')
+     * 创建日期为2019年2月14日，并且直属上级为名字为王姓
+     * date_format(create_time,'%Y-%m-%d')='2019-02-14' and manager_id in (select id from user where name like '王%')
     */
     @Test
     public void selectByWrapper4() {
@@ -102,8 +102,8 @@ public class SimpleTest {
     }
 
     /**
-       名字为王性并且（年龄小于40或邮箱不为空）
-       name like '王%' and (age<40 or email is not null)
+     * 名字为王性并且（年龄小于40或邮箱不为空）
+     * name like '王%' and (age<40 or email is not null)
     */
     @Test
     public void selectByWrapper5() {
@@ -114,8 +114,8 @@ public class SimpleTest {
     }
 
     /**
-       名字为王性或者（年龄小于40兵器年龄大于20并且邮箱不为空）
-       name like '王%' or (age<40 and age>20 and email is not null)
+     * 名字为王性或者（年龄小于40兵器年龄大于20并且邮箱不为空）
+     * name like '王%' or (age<40 and age>20 and email is not null)
     */
     @Test
     public void selectByWrapper6() {
@@ -126,8 +126,8 @@ public class SimpleTest {
     }
 
     /**
-       (年龄小于40或邮箱不为空)并且名字为王姓名
-       (age<40 or email is not null) and name like '王$'
+     * (年龄小于40或邮箱不为空)并且名字为王姓名
+     * (age<40 or email is not null) and name like '王$'
     */
     @Test
     public void selectByWrapper7() {
@@ -140,8 +140,8 @@ public class SimpleTest {
     }
 
     /**
-       年龄为30、31、34、35
-       age in (30、31、34、35)
+     * 年龄为30、31、34、35
+     * age in (30、31、34、35)
     */
     @Test
     public void selectByWrapper8() {
@@ -151,7 +151,7 @@ public class SimpleTest {
     }
 
     /**
-       只返回满足条件的其中一条语句即可
+     * 只返回满足条件的其中一条语句即可
     */
     @Test
     public void selectByWrapper9() {
@@ -161,7 +161,7 @@ public class SimpleTest {
     }
 
     /**
-       查询指定字段
+     * 查询指定字段
      */
     @Test
     public void selectByWrapperSupper(){
@@ -173,7 +173,7 @@ public class SimpleTest {
     }
 
     /**
-       排除指定字段
+     * 排除指定字段
      */
     @Test
     public void selectByWrapperSupper2(){
