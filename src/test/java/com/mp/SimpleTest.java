@@ -196,4 +196,17 @@ public class SimpleTest {
                 .like(StringUtils.isNotEmpty(email), "email", email);
         printQueryWrapper();
     }
+
+    /**
+     * 实体作为条件构造器
+     */
+    @Test
+    public void selectByWrapperEntity(){
+        User user = new User();
+        user.setName("刘红雨");
+        user.setAge(32);
+
+        queryWrapper = new QueryWrapper<User>(user);
+        printQueryWrapper();
+    }
 }
