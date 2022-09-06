@@ -209,4 +209,22 @@ public class SimpleTest {
         queryWrapper = new QueryWrapper<User>(user);
         printQueryWrapper();
     }
+
+    /**
+     * 类似于userMapper.selectByMap
+     * null 查询变成 is null
+     * queryWrapper.allEq(params, false)第二个参数，忽略null值条件
+     */
+    @Test
+    public void selectByWrapperAllEq(){
+        queryWrapper = new QueryWrapper<>();
+        Map<String,Object> params = new HashMap<>();
+        params.put("name", "王天风");
+        params.put("age",25);
+        queryWrapper.allEq(params);
+        // 对条件进行过滤
+        // queryWrapper.allEq((k,v) -> !k.equals("name"),params);
+
+        printQueryWrapper();
+    }
 }
