@@ -6,4 +6,8 @@
     <select id="selectAll" resultType="com.mp.entity.User">
         select * from user ${ew.customSqlSegment}
     </select>
+
+    <select id="selectUserPage" resultType="com.mp.entity.User">
+        select * from user ${ew.customSqlSegment}
+    </select>
 </mapper>
