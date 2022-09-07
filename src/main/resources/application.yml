@@ -11,3 +11,7 @@ logging:
     com.mp.dao: trace
   pattern:
     console: '%p%m%n'
+
+mybatis-plus:
+  mapper-locations:
+  - com/mp/mapper/*
